@@ -1,0 +1,13 @@
+[virtualenvs]
+in-project = true
+[tool.black]
+line-length = 119
+exclude = "git"
+
+[tool.isort]
+line_length = 119
+
+[tool.mypy]
+disallow_untyped_defs = true
+warn_return_any = true
+exclude = "venv"
