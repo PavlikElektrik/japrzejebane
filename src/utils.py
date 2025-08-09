@@ -8,6 +8,7 @@ from typing import Any, Dict, List, Optional, Tuple, TypedDict, Union
 import pandas as pd
 import requests
 from dotenv import load_dotenv
+from config import DATA_DIR, ROOT_DIR
 
 load_dotenv()
 
@@ -19,8 +20,8 @@ formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(messag
 ch.setFormatter(formatter)
 logger.addHandler(ch)
 
-DATA_FILE = Path("data/operations.xlsx")
-USER_SETTINGS_FILE = Path("user_settings.json")
+DATA_FILE = DATA_DIR / "operations.xlsx"
+USER_SETTINGS_FILE = ROOT_DIR / "user_settings.json"
 
 
 def get_greeting(datetime_str: Optional[str] = None) -> str:
@@ -94,7 +95,7 @@ class CurrencyRate(TypedDict):
 
 
 def get_currency_rates(
-    currencies: List[str], base: str = "RUB", settings: Optional[Dict[str, Any]] = None
+        currencies: List[str], base: str = "RUB", settings: Optional[Dict[str, Any]] = None
 ) -> List[CurrencyRate]:
     """Возвращает список курсов в формате [{currency, rate}, ...]"""
     settings = settings or load_user_settings()
